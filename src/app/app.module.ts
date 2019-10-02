@@ -18,6 +18,8 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 
 import { FbAuthService } from './services/fb-auth.service';
+import { FbbaseService } from './services/fb-base.service'
+
 import { HomeComponent } from './home/home.component';
 import { MainComponent } from './main/main.component';
 
@@ -48,7 +50,8 @@ import { MainComponent } from './main/main.component';
     MatListModule
 
   ],
-  providers: [FbAuthService],
+  providers: [FbAuthService, 
+              FbbaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

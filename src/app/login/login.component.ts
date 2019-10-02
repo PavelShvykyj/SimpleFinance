@@ -3,6 +3,8 @@ import * as firebase from 'firebase';
 import * as firebaseui from 'firebaseui'
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { FbbaseService } from '../services/fb-base.service';
+import { FbAuthService } from '../services/fb-auth.service';
 
 
 @Component({
@@ -16,7 +18,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(private fbAuth : AngularFireAuth,
               private router : Router,
-              private ngZone : NgZone) { }
+              private ngZone : NgZone,
+              private db : FbbaseService,
+              private auth : FbAuthService) { }
 
   ngOnInit() {
     const  uiConfig = {
@@ -44,13 +48,17 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.ui.delete();
   }
 
-  OnLoginSucsess() {
+  async OnLoginSucsess(resoult) {
    
+    
+
+    this.db.DeterminRootPath(resoult.user.uid);
     /// без ngZone ангулар не понимает что прошли изменения и не обновляет интерфейс
     this.ngZone.run(() => this.router.navigateByUrl("/home"));
   }
 
   OnLoginFail(error) {
+    this.db.ClearRootPath();
     console.log('OnLoginFail',error)
 
   }

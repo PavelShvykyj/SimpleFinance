@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FbProviderService } from './fb-provider.service';
+import { FbProviderService } from './fb-base.service';
 
 describe('FbProviderService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
