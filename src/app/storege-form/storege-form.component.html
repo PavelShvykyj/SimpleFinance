@@ -1,0 +1,22 @@
+<mat-card   class="form-card">
+  <mat-card-header >
+    <mat-card-title>Форма настройки кассы</mat-card-title>
+    <!-- <mat-card-subtitle>Обязательны для работы с 1С</mat-card-subtitle> -->
+  </mat-card-header>
+  
+  <mat-card-content >
+       <form  [formGroup]="form">
+              <mat-form-field  class="w-100">  
+                    <input required [formControl]="name"  matInput placeholder="Имя кассы"> 
+                    <mat-hint>Произвольное наименование </mat-hint> 
+                    <mat-icon matSuffix>mode_edit</mat-icon>
+                    <mat-error >{{ getErrorMessage( name ) }}</mat-error>
+              </mat-form-field>   
+       </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button color='primary'  mat-button (click)="Save()">Сохранить</button>
+    <button color='primary' mat-button (click)="Cancel()">Отмена</button>
+  </mat-card-actions>
+</mat-card>
+

@@ -18,12 +18,14 @@
   z-index: 1;
 }
 
-.divider {
-  margin: auto;
-}
+
 
 .avatar {
   max-height: 35px;
   border-radius: 4px;
 
+}
+
+.divider {
+  margin: auto;
 }

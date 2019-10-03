@@ -1,5 +1,6 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { FbbaseService } from '../services/fb-base.service';
+
 
 @Component({
   selector: 'app-home',
@@ -8,13 +9,16 @@ import { FbbaseService } from '../services/fb-base.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private db : FbbaseService) { }
+  constructor(private router : Router) { }
 
   ngOnInit() {
   }
 
+  Login() {
+    this.router.navigateByUrl('login');
+  }
 
-  test() {
-    this.db.test();
+  Storeges() {
+    this.router.navigateByUrl('main');
   }
 }
