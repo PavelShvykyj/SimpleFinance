@@ -2,7 +2,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FbbaseService } from '../services/fb-base.service';
 import { IStorege } from '../models/istorege';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-storege-form',
@@ -30,7 +30,7 @@ export class StoregeFormComponent implements OnInit {
   }
 
 
-  getErrorMessage(control : FormControl ) : string {
+  getErrorMessage(control : AbstractControl ) : string {
     if (control.hasError('required')) {
       return "поле не должно быть пустым..."
     }

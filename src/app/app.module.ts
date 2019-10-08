@@ -23,6 +23,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 
 /////////////////// Own Created ///////////////////////////////
 import { FbAuthService } from './services/fb-auth.service';
@@ -36,6 +38,7 @@ import { LoginComponent } from './login/login.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { StoregeFormComponent } from './storege-form/storege-form.component';
 import { StoregeResolver } from './storege-form/storege-form.resolver';
+import { CalendarComponent } from './calendar/calendar.component';
 
 
 
@@ -47,7 +50,8 @@ import { StoregeResolver } from './storege-form/storege-form.resolver';
     HomeComponent,
     MainComponent,
     StoregesComponent,
-    StoregeFormComponent
+    StoregeFormComponent,
+    CalendarComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -70,7 +74,9 @@ import { StoregeResolver } from './storege-form/storege-form.resolver';
     MatFormFieldModule,
     MatInputModule,
     MatSnackBarModule,
-    MatChipsModule
+    MatChipsModule,
+    MatGridListModule,
+
 
   ],
   providers: [StoregeResolver,

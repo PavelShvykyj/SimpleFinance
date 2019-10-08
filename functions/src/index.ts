@@ -1,16 +1,19 @@
 
 
 import * as functions from 'firebase-functions';
-import {  NewAccountsAllowed, UpdateUserDisable } from './init';
+import {  NewAccountsAllowed, UpdateUserDisable, InitStartDatabase } from './init';
 
-async function OnUserCreatedHanler(id  : string) {
+async function OnUserCreatedHanler(id  : string, mail : string | undefined) {
     const NewAccountAllowed : boolean = await NewAccountsAllowed();
     if( !NewAccountAllowed) {
         await UpdateUserDisable(id, true);
     }
+    else {
+        await InitStartDatabase(id, mail);
+    }
 }
 
-exports.OnUserCreated = functions.auth.user().onCreate(user =>  OnUserCreatedHanler(user.uid));
+exports.OnUserCreated = functions.auth.user().onCreate(user =>  OnUserCreatedHanler(user.uid, user.email));
 
 
 

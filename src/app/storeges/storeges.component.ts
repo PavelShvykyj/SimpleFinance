@@ -49,4 +49,8 @@ export class StoregesComponent implements OnInit, OnDestroy {
     })
   }
 
+  StoregeOnClick(storege : IStorege) {
+    this.router.navigateByUrl(`calendar/${storege.id}/${storege.name}`)
+  }
+
 }

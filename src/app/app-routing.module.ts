@@ -1,3 +1,4 @@
+import { CalendarComponent } from './calendar/calendar.component';
 
 import { MainComponent } from './main/main.component';
 import { AppComponent } from './app.component';
@@ -13,8 +14,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'main', component: MainComponent },
-  { path: 'storege/:storegeID', component:  StoregeFormComponent, resolve : {storege : StoregeResolver}}
-
+  { path: 'storege/:storegeID', component:  StoregeFormComponent, resolve : {storege : StoregeResolver}},
+  { path: 'calendar/:storegeID/:storegeName', component:  CalendarComponent },
+  { path: '**', component:  HomeComponent }
 ];
 
 @NgModule({

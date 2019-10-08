@@ -4,7 +4,7 @@
 
 <mat-toolbar class="storeges-container">  
   <mat-toolbar-row *ngFor="let storege of storeges">
-    <button mat-raised-button class="storege-button"> {{storege.name}} </button>
+    <button mat-raised-button class="storege-button" (click)="StoregeOnClick(storege)"><mat-icon>apps</mat-icon> {{storege.name}} </button>
     
     <div class="divider"></div>
     

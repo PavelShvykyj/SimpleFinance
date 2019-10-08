@@ -1,9 +1,12 @@
+
 import { IStorege } from './../models/istorege';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map, first } from 'rxjs/operators';
 import { Observable, of, from } from 'rxjs';
-import { store } from '@angular/core/src/render3';
+
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +14,15 @@ import { store } from '@angular/core/src/render3';
 export class FbbaseService {
 
   private rootPath : string;
+  private newUsersAllowed : boolean;
 
   constructor(private db : AngularFirestore) { }
 
   // Ищет ветку (документ) финанс по владельцу  опредиляет базовый путь всех запросов
-  DeterminRootPath(id : string ) {
+  async DeterminRootPath(id : string ) {
     this.rootPath = "";
-    this.db.firestore.collection('finances').where('owners','array-contains',id).limit(1).get().then(
-      res => {  this.rootPath = ""; if(!res.empty) {this.rootPath =`finances/${res.docs[0].id}`}}
+    await this.db.firestore.collection('finances').where('owners','array-contains',id).limit(1).get().then(
+      res => {  this.rootPath = ""; if(!res.empty) {this.rootPath =`finances/${res.docs[0].id}`; }}
     )
   }
 
@@ -30,7 +34,17 @@ export class FbbaseService {
     return this.rootPath;
   }
   
+  public async NewUsersAllowed() : Promise<boolean> {
+    if (this.newUsersAllowed != undefined) {
+       return new Promise((resolve) => {resolve(this.newUsersAllowed)});
+    }
+    
+    return this.db.firestore.doc('finances/AppOptions').get().then(snap => {return snap.data().AllowNewAccounts})
+
+  }
+
   GetStoreges() : Observable<IStorege[]> {
+    
     if(!this.rootPath) {
       return of([]);
     }

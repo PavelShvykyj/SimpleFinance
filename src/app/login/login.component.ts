@@ -5,6 +5,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { FbbaseService } from '../services/fb-base.service';
 import { FbAuthService } from '../services/fb-auth.service';
+import { MatSnackBar } from '@angular/material';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit, OnDestroy {
               private router : Router,
               private ngZone : NgZone,
               private db : FbbaseService,
-              private auth : FbAuthService) { }
+              private auth : FbAuthService,
+              private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     const  uiConfig = {
@@ -49,12 +51,28 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   async OnLoginSucsess(resoult) {
-   
+      let NewUsersAllowed : boolean = await this.db.NewUsersAllowed();
+
+    
+      if(resoult.additionalUserInfo.isNewUser && !NewUsersAllowed) {
+        
+        this.auth.LogOut();
+        let snack = this._snackBar.open("Вы успешно зарегистрировались. Работа новых пользователей веремнно приостановлена.", "Ok", 
+        {
+          duration: 5000
+        });
+        
+        snack.afterDismissed().subscribe(() => {
+          this.ngZone.run(() => this.router.navigateByUrl("home"));
+        });
+      }  
+      else {
+          await this.db.DeterminRootPath(resoult.user.uid);
+          /// без ngZone ангулар не понимает что прошли изменения и не обновляет интерфейс
+          this.ngZone.run(() => this.router.navigateByUrl("main"));
+      }
     
 
-    this.db.DeterminRootPath(resoult.user.uid);
-    /// без ngZone ангулар не понимает что прошли изменения и не обновляет интерфейс
-    this.ngZone.run(() => this.router.navigateByUrl("/home"));
   }
 
   OnLoginFail(error) {
