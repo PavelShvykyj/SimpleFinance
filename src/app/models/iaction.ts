@@ -10,11 +10,7 @@ export enum actionCategory {
     education
 }
 
-export interface IAppOptions {
-    AllowNewAccounts : boolean 
-}
-
-export interface IAction {
+export interface iaction {
     сategory : actionCategory,
     desckription : string,
     summ : number,
