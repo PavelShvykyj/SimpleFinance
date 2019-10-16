@@ -5,8 +5,16 @@
  
   <mat-card-content>
       <mat-grid-list cols="7" rowHeight="40px">
-          <mat-grid-tile *ngFor="let element of calendar"><button [disabled]="element.status == calendarElementStatus.Disabled" mat-button [color]="colors[calendarElementStatus[element.status]]">{{ element.title }}</button></mat-grid-tile>
-          
+          <mat-grid-tile *ngFor="let element of calendar">
+              <button [disabled]="element.status == calendarElementStatus.Disabled" 
+                (click)="GoToAction(element)"
+                
+                mat-button [color]="colors[calendarElementStatus[element.status]]"
+                >
+                <span class="marker"> {{ element.counter }} </span>
+                {{ element.title }}
+               </button>
+          </mat-grid-tile>
       </mat-grid-list>
   </mat-card-content>  
 

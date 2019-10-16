@@ -5,3 +5,17 @@
     max-width: 95%;
     padding: 4px;
 }
+
+
+.marker {
+    overflow: visible !important;
+    font-size: 70% !important;
+    font-style: italic;
+    font-weight: bolder;
+    background: inherit;
+    color: inherit;
+    z-index: 100 !important;
+    position: absolute;
+    
+    top: 10px;
+}

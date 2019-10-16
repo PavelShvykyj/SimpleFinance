@@ -22,8 +22,8 @@ async function OnActionCreateHandler(snap : FirebaseFirestore.DocumentSnapshot, 
         
         ///finances/QX0Cga7vyvZ5wiJpkNJs/storeges/KOv5g3ZyavbiILcIa8tV
         const action : IAction = (snap.data() as IAction);
-        const changedSumm  = action.summ; 
-        const actoinDateID = action.actionDate;
+        const changedSumm : number  = action.summ ; 
+        const actoinDateID : number = action.actionDate;
 
         const CounterPath = `finances/${context.params.finanseid}/storeges/${context.params.storegeid}/counters/storegecounter`;
         const CounterRef =  db.doc(CounterPath)
@@ -36,17 +36,17 @@ async function OnActionCreateHandler(snap : FirebaseFirestore.DocumentSnapshot, 
         
         
         if(BlockedCounterData) {
-            await transaction.update(CounterRef,{countervalue : BlockedCounterData.countervalue + changedSumm});
+            await transaction.set(CounterRef,{countervalue : (BlockedCounterData.countervalue as number)  + changedSumm});
         } 
 
         
         if(BlockedCounterDateSnap.exists) {
-            const BlockedCounterDateData = BlockedCounterSnap.data();
+            const BlockedCounterDateData = BlockedCounterDateSnap.data();
             if(BlockedCounterDateData) {
-                await transaction.update(CounterRef,{countervalue : BlockedCounterDateData.countervalue + changedSumm});
+                await transaction.set(CounterDateRef,{countervalue : (BlockedCounterDateData.countervalue as number) + changedSumm});
             } 
         } else {
-            await transaction.create(CounterRef,{countervalue : changedSumm});
+            await transaction.create(CounterDateRef,{countervalue :  changedSumm});
         }
     })
 }
@@ -87,7 +87,7 @@ async function OnActionUpdateHandler(changes : functions.Change<FirebaseFirestor
         if(BlockedCounterDateSnap.exists) {
             const BlockedCounterDateData = BlockedCounterDateSnap.data();
             if(BlockedCounterDateData) {
-                await transaction.update(CounterDateRef,{countervalue : BlockedCounterDateData.countervalue + changedSumm});
+                await transaction.update(CounterDateRef,{countervalue :  changedSumm});
             } 
         } else {
             await transaction.create(CounterDateRef,{countervalue : changedSumm});
@@ -100,7 +100,7 @@ async function OnActionDeleteHandler(snap : FirebaseFirestore.DocumentSnapshot, 
         
         ///finances/QX0Cga7vyvZ5wiJpkNJs/storeges/KOv5g3ZyavbiILcIa8tV
         const action : IAction = (snap.data() as IAction);
-        const changedSumm  = action.summ; 
+        const changedSumm : number = action.summ; 
         const actoinDateID = action.actionDate;
 
         const CounterPath = `finances/${context.params.finanseid}/storeges/${context.params.storegeid}/counters/storegecounter`;
@@ -114,7 +114,7 @@ async function OnActionDeleteHandler(snap : FirebaseFirestore.DocumentSnapshot, 
         
         
         if(BlockedCounterData) {
-            await transaction.update(CounterRef,{countervalue : BlockedCounterData.countervalue - changedSumm});
+            await transaction.update(CounterRef,{countervalue : (BlockedCounterData.countervalue as number) - changedSumm});
         } 
 
         if(BlockedCounterDateSnap.exists) {

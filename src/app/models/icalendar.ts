@@ -10,5 +10,6 @@ export enum CalendarElementStatus {
 export interface icalendar {
     title : string,
     date? : Date,
-    status : CalendarElementStatus
+    status : CalendarElementStatus,
+    counter : string
 }

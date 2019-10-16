@@ -1,8 +1,12 @@
+import { icounter } from './../models/icounter';
+import { Observable } from 'rxjs';
+import { FbbaseService } from './../services/fb-base.service';
 
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IStorege } from '../models/istorege';
 import { icalendar, CalendarElementStatus } from '../models/icalendar';
+
 
 @Component({
   selector: 'app-calendar',
@@ -11,6 +15,7 @@ import { icalendar, CalendarElementStatus } from '../models/icalendar';
 })
 export class CalendarComponent implements OnInit {
 
+  counter : icounter = {};
   storege : IStorege;
   calendar : icalendar[];
   calendarElementStatus : typeof CalendarElementStatus  = CalendarElementStatus; 
@@ -23,45 +28,66 @@ export class CalendarComponent implements OnInit {
 
   }
 
-  constructor(private router : Router, private activatedrout : ActivatedRoute) {
+  constructor(private router : Router, private activatedrout : ActivatedRoute,private db : FbbaseService) {
     const currdate = new Date();
-    console.log(new Date(currdate.getFullYear(), currdate.getMonth(), currdate.getDate()));
-    this.storege = {id :  this.activatedrout.snapshot.params.storegeID, name : this.activatedrout.snapshot.params.storegeName} 
     this.InitCalendar(currdate.getMonth(), currdate.getFullYear());
+    this.storege = {id :  this.activatedrout.snapshot.params.storegeID, name : this.activatedrout.snapshot.params.storegeName} 
+    this.db.GetStoregeDateCounters(this.storege.id).subscribe(
+      counter => {this.counter = counter; this.InjectCounterInCalendar(); } 
+    );
+    
+    
   }
 
   ngOnInit() {
+  }
+
+
+  InjectCounterInCalendar() {
+    this.calendar.forEach(calendarelement => {
+      this.SetCountervalue(calendarelement)
+    });
+
+
   }
 
   InitCalendar(month : number, year : number)  {
     this.calendar = [];
     this.calendar.push({
       status : CalendarElementStatus.Header,
-      title : "Пн"
+      title : "Пн",
+      counter : ""
+
     });
     this.calendar.push({
       status : CalendarElementStatus.Header,
-      title : "Вт"
+      title : "Вт",
+      counter : ""
     });
     this.calendar.push({
       status : CalendarElementStatus.Header,
-      title : "Ср"
+      title : "Ср",
+      counter : ""
     });
     this.calendar.push({
       status : CalendarElementStatus.Header,
-      title : "Чт"
+      title : "Чт",
+      counter : ""
     });
     this.calendar.push({
       status : CalendarElementStatus.Header,
-      title : "Пт"
+      title : "Пт",
+      counter : ""
     });
     this.calendar.push({
       status : CalendarElementStatus.Header,
-      title : "Сб"
+      title : "Сб",
+      counter : ""
     });
     this.calendar.push({
       status : CalendarElementStatus.Header,
-      title : "Вс"
+      title : "Вс",
+      counter : ""
     });
 
     const  startDate = new Date(year,month,1);
@@ -72,7 +98,8 @@ export class CalendarComponent implements OnInit {
     for (let index = 1; index < startweekDay; index++){
       this.calendar.push({
         status : CalendarElementStatus.Disabled,
-        title : ""
+        title : "",
+        counter : ""
       });
     }
 
@@ -80,7 +107,6 @@ export class CalendarComponent implements OnInit {
       let status : CalendarElementStatus = CalendarElementStatus.Date;
       const date : Date = new Date(year,month,index);
       if( currdate.getDate() == index) {
-        console.log('current', date);
         status = CalendarElementStatus.Current
       } 
       else if(date.getMonth() != month) {
@@ -93,11 +119,31 @@ export class CalendarComponent implements OnInit {
       this.calendar.push({
         status : status,
         title : date.getDate().toString(),
-        date : date
+        date : date,
+        counter : ""
       });
     }
   }
 
+  SetCountervalue(element : icalendar)  {
+   
 
+   if(element.date == undefined) {
+    element.counter = "";
+    return
+   }
+    
+    const  id  = element.date.getTime().toString();
+    
+    if (this.counter[id] == undefined) {
+      element.counter = "";
+    } else {
+      element.counter = this.counter[id].toString();
+    }
+  }
+
+  GoToAction(element : icalendar) {
+    this.router.navigateByUrl(`action/${element.date.getTime()}/${this.storege.id}`);
+  }
 
 }

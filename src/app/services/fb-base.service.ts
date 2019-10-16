@@ -1,9 +1,12 @@
+import { iaction } from './../models/iaction';
+
 
 import { IStorege } from './../models/istorege';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map, first } from 'rxjs/operators';
 import { Observable, of, from } from 'rxjs';
+import { icounter, icounterelement } from '../models/icounter';
 
 
 
@@ -77,11 +80,39 @@ export class FbbaseService {
     return from(this.db.doc(`${this.RootPath}/storeges/${id}`).delete());
   }
 
-  test() {
-    console.log(`${this.rootPath}/storeges`);
-    this.db.collection(`${this.rootPath}/storeges`).get().subscribe(res => console.log('called ',res));
-    
+  CreateAction(storegeID : string , action : Partial<iaction>) : Observable<any> {
+    return from(this.db.collection(`${this.RootPath}/storeges/${storegeID}/actions`).add(action)); 
+  }
 
+
+
+  GetStoregeDateCounters(StoregeID : string) : Observable<icounter> {
+
+    if(!this.rootPath) {
+      return of({});
+    }
+
+    return this.db.collection(`${this.rootPath}/storeges/${StoregeID}/counters`)
+      .snapshotChanges()
+      .pipe(map(snapCounters => {
+          let counter : icounter = {};
+          snapCounters.forEach(element => {
+            counter[element.payload.doc.id] = (element.payload.doc.data() as icounterelement).countervalue;
+          });
+
+          return counter;
+           } )
+      ) 
+  }
+
+  async CreateDateCounter(StoregeID : string, CounterID : string) {
+    let counterSnap = await this.db.firestore.doc(`${this.RootPath}/storeges/${StoregeID}/counters/${CounterID}`).get();
+    console.log(counterSnap);
+    if(!counterSnap.exists) {
+      const emptyCounter = {countervalue : 0};
+      await this.db.firestore.collection(`${this.RootPath}/storeges/${StoregeID}/counters`).doc(CounterID).set(emptyCounter);
+
+    }
   }
 
 }

@@ -24,6 +24,9 @@ import {MatInputModule} from '@angular/material';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatSelectModule} from '@angular/material/select';
 
 
 /////////////////// Own Created ///////////////////////////////
@@ -39,6 +42,7 @@ import { MainNavComponent } from './main-nav/main-nav.component';
 import { StoregeFormComponent } from './storege-form/storege-form.component';
 import { StoregeResolver } from './storege-form/storege-form.resolver';
 import { CalendarComponent } from './calendar/calendar.component';
+import { ActionComponent } from './action/action.component';
 
 
 
@@ -51,7 +55,8 @@ import { CalendarComponent } from './calendar/calendar.component';
     MainComponent,
     StoregesComponent,
     StoregeFormComponent,
-    CalendarComponent
+    CalendarComponent,
+    ActionComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -76,6 +81,9 @@ import { CalendarComponent } from './calendar/calendar.component';
     MatSnackBarModule,
     MatChipsModule,
     MatGridListModule,
+    MatBadgeModule,
+    MatStepperModule,
+    MatSelectModule
 
 
   ],
