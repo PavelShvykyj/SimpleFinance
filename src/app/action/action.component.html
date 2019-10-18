@@ -1,60 +1,80 @@
 
-<mat-vertical-stepper linear=true #stepper>
-  <mat-step [stepControl]="categoryFormGroup">
-    <form [formGroup]="categoryFormGroup">
-      <ng-template matStepLabel>Выбирете категорию </ng-template>
-      <mat-form-field>
-        <!-- <input matInput placeholder="Категория затрат" formControlName="categoryCtrl" required> -->
-        
-        <mat-select formControlName="categoryCtrl" required>
-          <mat-option *ngFor="let category of categories" [value]="category">
-            {{category}}
-          </mat-option>
-        </mat-select>
-      
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="summFormGroup">
-    <form [formGroup]="summFormGroup">
-      <ng-template matStepLabel>Укажите сумму затраты</ng-template>
-      <mat-form-field>
-        <input type="number" matInput placeholder="Сумма" formControlName="summCtrl" required>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  
-  <mat-step [stepControl]="descriptionFormGroup">
-    <form [formGroup]="descriptionFormGroup">
-      <ng-template matStepLabel>Укажите дополнтельное описание</ng-template>
-      <mat-form-field>
-        <input matInput placeholder="Описание" formControlName="descriptionCtrl" >
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  
-  
-  
-  <mat-step>
-    <ng-template matStepLabel>Готово</ng-template>
-    Завершение.
-    <div>
-      <button mat-button color='primary' matStepperPrevious>Back</button>
-      <button mat-button color='primary' (click)="Cancel()">Отменить</button>
-      <button mat-button color='primary' (click)="Save()">Сохранить</button>
-      <button mat-button color='warn' (click)="stepper.reset()">Сброс значений</button>
-    </div>
-  </mat-step>
-</mat-vertical-stepper>
+<div></div>
 
+
+
+
+
+<mat-card >
+  <mat-card-header>
+    
+    <mat-card-title> {{ selectedDate | date:'fullDate' }} </mat-card-title>
+    <mat-card-subtitle> {{ dateID }} </mat-card-subtitle>
+  </mat-card-header>
+  
+  <mat-card-content>
+    <mat-vertical-stepper linear=true #stepper>
+      <mat-step [stepControl]="categoryFormGroup">
+        <form [formGroup]="categoryFormGroup">
+          <ng-template matStepLabel>Выбирете категорию </ng-template>
+          <mat-form-field>
+            <!-- <input matInput placeholder="Категория затрат" formControlName="categoryCtrl" required> -->
+            
+            <mat-select formControlName="categoryCtrl" required>
+              <mat-option *ngFor="let category of categories" [value]="category">
+                {{category}}
+              </mat-option>
+            </mat-select>
+          
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="summFormGroup">
+        <form [formGroup]="summFormGroup">
+          <ng-template matStepLabel>Укажите сумму затраты</ng-template>
+          <mat-form-field>
+            <input type="number" matInput placeholder="Сумма" formControlName="summCtrl" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      
+      <mat-step [stepControl]="descriptionFormGroup">
+        <form [formGroup]="descriptionFormGroup">
+          <ng-template matStepLabel>Укажите дополнтельное описание</ng-template>
+          <mat-form-field>
+            <input matInput placeholder="Описание" formControlName="descriptionCtrl" >
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      
+      
+      
+      <mat-step>
+        <ng-template matStepLabel>Готово</ng-template>
+        Завершение.
+        <div>
+          <button mat-button color='primary' matStepperPrevious>Back</button>
+          
+          <button mat-button color='primary' (click)="Save()">Сохранить</button>
+          <button mat-button color='warn' (click)="stepper.reset()">Сброс значений</button>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+  </mat-card-content>
+  
+  <mat-card-actions>
+    <button mat-button color='primary' (click)="Cancel()">Отменить</button>   
+  </mat-card-actions>
+
+</mat-card>

@@ -90,7 +90,7 @@ export class CalendarComponent implements OnInit {
       counter : ""
     });
 
-    const  startDate = new Date(year,month,1);
+    const  startDate = new Date(year,month,1,0,0,0,0);
     const  startDay = startDate.getDate()
     const  startweekDay = startDate.getDay() == 0 ? 7 : startDate.getDay();
     const  currdate = new Date();
@@ -105,7 +105,7 @@ export class CalendarComponent implements OnInit {
 
     for (let index = startDay; index < 49; index++) {
       let status : CalendarElementStatus = CalendarElementStatus.Date;
-      const date : Date = new Date(year,month,index);
+      const date : Date = new Date(year,month,index,0,0,0,0);
       if( currdate.getDate() == index) {
         status = CalendarElementStatus.Current
       } 
@@ -133,7 +133,7 @@ export class CalendarComponent implements OnInit {
     return
    }
     
-    const  id  = element.date.getTime().toString();
+    const  id = this.GetDateID(element.date).toString();
     
     if (this.counter[id] == undefined) {
       element.counter = "";
@@ -143,7 +143,12 @@ export class CalendarComponent implements OnInit {
   }
 
   GoToAction(element : icalendar) {
-    this.router.navigateByUrl(`action/${element.date.getTime()}/${this.storege.id}`);
+    this.router.navigateByUrl(`action/${this.GetDateID(element.date)}/${this.storege.id}`);
   }
+
+  GetDateID(date : Date): number {
+    return Date.UTC(date.getUTCFullYear(),date.getUTCMonth(), date.getUTCDate()+1,0,0,0,0);
+  }
+
 
 }

@@ -27,13 +27,22 @@ export class ActionComponent implements OnInit {
     actionCategory[actionCategory.sport]
   ]
 
+  dateID : number;
+  selectedDate : Date;
+  storegeID: string;
 
   constructor(private _formBuilder: FormBuilder,
               private router : Router,
               private activatedrout : ActivatedRoute,
               private db : FbbaseService,
               private _snackBar: MatSnackBar
-              ) { }
+              ) {
+
+                
+                this.dateID =  1*(this.activatedrout.snapshot.params.dateID as number);
+                this.selectedDate = new Date(this.dateID*1);  
+                this.storegeID = this.activatedrout.snapshot.params.storegeID;  
+               }
 
   ngOnInit() {
     
@@ -50,7 +59,7 @@ export class ActionComponent implements OnInit {
       descriptionCtrl: ['']
     });
 
-    this.db.CreateDateCounter(this.activatedrout.snapshot.params.storegeID, this.activatedrout.snapshot.params.dateID)
+    this.db.CreateDateCounter(this.storegeID, this.dateID.toString())
 
   }
 
@@ -70,7 +79,7 @@ export class ActionComponent implements OnInit {
       сategory : actionCategory.necessary,
       desckription : this.descriptionFormGroup.value.descriptionCtrl,
       summ : (this.summFormGroup.value.summCtrl as number),
-      actionDate : (this.activatedrout.snapshot.params.dateID as number) 
+      actionDate : this.dateID 
     }
    
     this.db.CreateAction(this.activatedrout.snapshot.params.storegeID, action).subscribe(
