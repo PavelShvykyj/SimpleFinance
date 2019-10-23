@@ -4,11 +4,12 @@
 
 <mat-toolbar class="storeges-container">  
   <mat-toolbar-row *ngFor="let storege of storeges">
-    <button mat-raised-button class="storege-button" (click)="StoregeOnClick(storege)"><mat-icon>apps</mat-icon> {{storege.name}} </button>
+    <button mat-button class="storege-button" (click)="StoregeOnClick(storege)"><mat-icon>apps</mat-icon> {{storege.name}} </button>
     
     <div class="divider"></div>
     
     <mat-button-toggle-group>
+      <mat-button-toggle value="ActionList"  color="primary"  (click)="GoToActionList(storege)"> <mat-icon>list</mat-icon> </mat-button-toggle>
       <mat-button-toggle value="edit"    color="primary"  (click)="Edit(storege.id)"> <mat-icon> edit   </mat-icon> </mat-button-toggle>
       <mat-button-toggle value="delete"  color="primary"  (click)="Delete(storege.id)"> <mat-icon> delete </mat-icon> </mat-button-toggle>
     </mat-button-toggle-group>

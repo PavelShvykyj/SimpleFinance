@@ -27,7 +27,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSelectModule} from '@angular/material/select';
-
+import {MatTableModule} from '@angular/material/table';
 
 /////////////////// Own Created ///////////////////////////////
 import { FbAuthService } from './services/fb-auth.service';
@@ -43,6 +43,7 @@ import { StoregeFormComponent } from './storege-form/storege-form.component';
 import { StoregeResolver } from './storege-form/storege-form.resolver';
 import { CalendarComponent } from './calendar/calendar.component';
 import { ActionComponent } from './action/action.component';
+import { ActionListComponent } from './action-list/action-list.component';
 
 
 
@@ -56,7 +57,8 @@ import { ActionComponent } from './action/action.component';
     StoregesComponent,
     StoregeFormComponent,
     CalendarComponent,
-    ActionComponent
+    ActionComponent,
+    ActionListComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -83,7 +85,8 @@ import { ActionComponent } from './action/action.component';
     MatGridListModule,
     MatBadgeModule,
     MatStepperModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTableModule
 
 
   ],

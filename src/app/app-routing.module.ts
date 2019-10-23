@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { StoregeFormComponent } from './storege-form/storege-form.component';
 import { StoregeResolver } from './storege-form/storege-form.resolver';
 import { ActionComponent } from './action/action.component';
+import { ActionListComponent } from './action-list/action-list.component';
 
 const routes: Routes = [
   
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'storege/:storegeID', component:  StoregeFormComponent, resolve : {storege : StoregeResolver}},
   { path: 'calendar/:storegeID/:storegeName', component:  CalendarComponent },
   { path: 'action/:dateID/:storegeID' , component : ActionComponent },
+  { path: 'actionlist/:storegeID/:storegeName' , component : ActionListComponent },
   { path: '**', component:  HomeComponent }
 ];
 

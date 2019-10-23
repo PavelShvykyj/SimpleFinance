@@ -11,9 +11,9 @@ export enum actionCategory {
 }
 
 export interface iaction {
-    сategory : actionCategory,
+    category : actionCategory,
     desckription : string,
     summ : number,
     actionDate : number
-
+    id? : string
 }

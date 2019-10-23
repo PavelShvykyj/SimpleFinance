@@ -61,6 +61,31 @@ export class FbbaseService {
        )
   }
  
+  GetActions(storegeid : string, startPeriod : number , endPeriod : number , pageIndex = 0, pageSize = 20  ) : Observable<iaction[]> {
+
+    if(!this.rootPath) {
+      return of([]);
+    }
+
+    return this.db.collection(`${this.rootPath}/storeges/${storegeid}/actions`,ref => 
+      ref.orderBy('actionDate')
+         .where('actionDate',">",startPeriod)
+         .where('actionDate',"<=",endPeriod)
+         .startAfter(pageIndex*pageSize)
+         .limit(pageSize) 
+      )
+    .snapshotChanges()
+    .pipe(
+      map(snapActions => {
+        
+        return snapActions.map(snapAction => {
+          return <iaction>{id : snapAction.payload.doc.id, ...snapAction.payload.doc.data()}
+        } )
+       })
+       )
+
+  }
+
   GetStorege(relativePath : string) : Observable<IStorege> {
       
       return this.db.doc(`${this.RootPath}/${relativePath}`).get()

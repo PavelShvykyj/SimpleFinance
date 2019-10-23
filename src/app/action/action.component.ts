@@ -16,16 +16,19 @@ export class ActionComponent implements OnInit {
   summFormGroup: FormGroup;
   descriptionFormGroup: FormGroup;
   categories : string[] = [
-    actionCategory[actionCategory.cat],
-    actionCategory[actionCategory.chemistry],
-    actionCategory[actionCategory.clothes],
+    actionCategory[actionCategory.sport],
     actionCategory[actionCategory.eat],
-    actionCategory[actionCategory.education],
     actionCategory[actionCategory.necessary],
     actionCategory[actionCategory.unnecessary],
     actionCategory[actionCategory.pocket],
-    actionCategory[actionCategory.sport]
+    actionCategory[actionCategory.chemistry],
+    actionCategory[actionCategory.cat],
+    actionCategory[actionCategory.clothes],
+    actionCategory[actionCategory.education]
   ]
+
+ 
+  
 
   dateID : number;
   selectedDate : Date;
@@ -76,7 +79,7 @@ export class ActionComponent implements OnInit {
 
 
     const action : iaction = {
-      сategory : actionCategory.necessary,
+      category : (this.categories.lastIndexOf(this.categoryFormGroup.value.categoryCtrl)),
       desckription : this.descriptionFormGroup.value.descriptionCtrl,
       summ : (this.summFormGroup.value.summCtrl as number),
       actionDate : this.dateID 
