@@ -15,7 +15,7 @@ import { MatSnackBar } from '@angular/material';
 })
 export class ActionListComponent implements OnInit {
 
-  displayedColumns : string[] = ['date','summ','category','buttonsgroup'];
+  displayedColumns : string[] = ['date','summ','category'];
   dataSource : ActionListDataSourse;
   storegeID : string;
   storegeName : string;

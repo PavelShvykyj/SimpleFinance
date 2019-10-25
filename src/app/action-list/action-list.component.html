@@ -12,8 +12,6 @@
               <mat-footer-cell *matFooterCellDef> id  </mat-footer-cell>
             </ng-container>
             
-          
-          
             <ng-container matColumnDef="date" >
               <mat-header-cell *matHeaderCellDef>Дата</mat-header-cell>
               <mat-cell *matCellDef="let action">{{GetDate(action.actionDate) | date:'mediumDate'  }}</mat-cell>
@@ -33,9 +31,7 @@
             </ng-container>
           
             <ng-container matColumnDef="desckription">
-              
               <mat-cell *matCellDef="let action">Описание : {{action.desckription}}</mat-cell>
-              
             </ng-container>
           
             <ng-container matColumnDef="buttonsgroup">
@@ -44,14 +40,10 @@
               <mat-footer-cell *matFooterCellDef> buttonsgroup  </mat-footer-cell>
             </ng-container>
           
-            
-          
-          
             <mat-header-row *matHeaderRowDef="displayedColumns ; sticky: true" ></mat-header-row>
-            
           
             <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-            <mat-row *matRowDef="let descriptionrow; columns: ['desckription'] "></mat-row>
+            <mat-row *matRowDef="let descriptionrow; columns: ['desckription','buttonsgroup'] "></mat-row>
             
             <mat-footer-row *matFooterRowDef="displayedColumns"></mat-footer-row>
             
