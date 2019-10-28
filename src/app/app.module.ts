@@ -28,6 +28,8 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTableModule} from '@angular/material/table';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material';
 
 /////////////////// Own Created ///////////////////////////////
 import { FbAuthService } from './services/fb-auth.service';
@@ -86,7 +88,9 @@ import { ActionListComponent } from './action-list/action-list.component';
     MatBadgeModule,
     MatStepperModule,
     MatSelectModule,
-    MatTableModule
+    MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule
 
 
   ],
