@@ -50,7 +50,7 @@
           
             <ng-container matColumnDef="buttonsgroup">
               <mat-header-cell *matHeaderCellDef>Действия </mat-header-cell>
-              <mat-cell *matCellDef="let action"><button mat-button><mat-icon>delete</mat-icon> </button> <button mat-button> <mat-icon>edit</mat-icon></button>  </mat-cell>
+              <mat-cell *matCellDef="let action"><button mat-button (click)="DeleteAction(action.id)"><mat-icon>delete</mat-icon> </button> <button (click)="EditAction(action)" mat-button> <mat-icon>edit</mat-icon></button>  </mat-cell>
               <mat-footer-cell *matFooterCellDef> buttonsgroup  </mat-footer-cell>
             </ng-container>
           

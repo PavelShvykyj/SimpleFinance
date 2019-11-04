@@ -30,6 +30,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatTableModule} from '@angular/material/table';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
+import {MatDialogModule} from '@angular/material/dialog';
 
 /////////////////// Own Created ///////////////////////////////
 import { FbAuthService } from './services/fb-auth.service';
@@ -46,6 +47,7 @@ import { StoregeResolver } from './storege-form/storege-form.resolver';
 import { CalendarComponent } from './calendar/calendar.component';
 import { ActionComponent } from './action/action.component';
 import { ActionListComponent } from './action-list/action-list.component';
+import { UpdateActionDialogComponent } from './update-action-dialog/update-action-dialog.component';
 
 
 
@@ -60,7 +62,8 @@ import { ActionListComponent } from './action-list/action-list.component';
     StoregeFormComponent,
     CalendarComponent,
     ActionComponent,
-    ActionListComponent
+    ActionListComponent,
+    UpdateActionDialogComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -90,9 +93,13 @@ import { ActionListComponent } from './action-list/action-list.component';
     MatSelectModule,
     MatTableModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatDialogModule
 
 
+  ],
+  entryComponents: [
+    UpdateActionDialogComponent
   ],
   providers: [StoregeResolver,
               FbAuthService, 

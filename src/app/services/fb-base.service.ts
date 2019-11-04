@@ -5,7 +5,7 @@ import { IStorege } from './../models/istorege';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map, first } from 'rxjs/operators';
-import { Observable, of, from } from 'rxjs';
+import { Observable, of, from, throwError } from 'rxjs';
 import { icounter, icounterelement } from '../models/icounter';
 
 
@@ -109,7 +109,17 @@ export class FbbaseService {
     return from(this.db.collection(`${this.RootPath}/storeges/${storegeID}/actions`).add(action)); 
   }
 
+  DeleteAction(storegeID : string, actionID : string) {
+    return from(this.db.doc(`${this.RootPath}/storeges/${storegeID}/actions/${actionID}`).delete());
+  }
 
+  UpdateAction(storegeID : string , action : Partial<iaction>) : Observable<any> {
+    if(!action.id) {
+      return throwError('empty id'); 
+    }
+    
+    return from( this.db.doc(`${this.RootPath}/storeges/${storegeID}/actions/${action.id}`).update(action));
+  }
 
   GetStoregeDateCounters(StoregeID : string) : Observable<icounter> {
 

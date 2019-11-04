@@ -34,6 +34,6 @@ export class ActionListDataSourse implements DataSource<iaction> {
             catchError(() => of([])),
             finalize(() => this.loadingSubject.next(false))
         )
-        .subscribe(actions => {console.log(actions); this.actionSubject.next(actions)} );
+        .subscribe(actions => {this.actionSubject.next(actions)} );
     }
 } 
