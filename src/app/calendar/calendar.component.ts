@@ -32,8 +32,10 @@ export class CalendarComponent implements OnInit {
     const currdate = new Date();
     this.InitCalendar(currdate.getMonth(), currdate.getFullYear());
     this.storege = {id :  this.activatedrout.snapshot.params.storegeID, name : this.activatedrout.snapshot.params.storegeName} 
+    
+ 
     this.db.GetStoregeDateCounters(this.storege.id).subscribe(
-      counter => {this.counter = counter; this.InjectCounterInCalendar(); } 
+      counter => { this.counter = counter; this.InjectCounterInCalendar(); } 
     );
     
     
@@ -143,7 +145,7 @@ export class CalendarComponent implements OnInit {
   }
 
   GoToAction(element : icalendar) {
-    this.router.navigateByUrl(`action/${this.GetDateID(element.date)}/${this.storege.id}`);
+    this.router.navigateByUrl(`action/${this.GetDateID(element.date)}/${this.storege.id}/${this.storege.name}`);
   }
 
   GetDateID(date : Date): number {

@@ -67,12 +67,13 @@ export class FbbaseService {
       return of([]);
     }
 
+    
     return this.db.collection(`${this.rootPath}/storeges/${storegeid}/actions`,ref => 
       ref.orderBy('actionDate')
          .where('actionDate',">",startPeriod)
          .where('actionDate',"<=",endPeriod)
-         .startAfter(pageIndex*pageSize)
-         .limit(pageSize) 
+        //  .startAfter(pageIndex*pageSize)
+        //  .limit(pageSize) 
       )
     .snapshotChanges()
     .pipe(
@@ -121,6 +122,10 @@ export class FbbaseService {
     return from( this.db.doc(`${this.RootPath}/storeges/${storegeID}/actions/${action.id}`).update(action));
   }
 
+  GetDateID(date : Date): number {
+    return Date.UTC(date.getUTCFullYear(),date.getUTCMonth(), date.getUTCDate()+1,0,0,0,0);
+  }
+
   GetStoregeDateCounters(StoregeID : string) : Observable<icounter> {
 
     if(!this.rootPath) {
@@ -142,7 +147,6 @@ export class FbbaseService {
 
   async CreateDateCounter(StoregeID : string, CounterID : string) {
     let counterSnap = await this.db.firestore.doc(`${this.RootPath}/storeges/${StoregeID}/counters/${CounterID}`).get();
-    console.log(counterSnap);
     if(!counterSnap.exists) {
       const emptyCounter = {countervalue : 0};
       await this.db.firestore.collection(`${this.RootPath}/storeges/${StoregeID}/counters`).doc(CounterID).set(emptyCounter);

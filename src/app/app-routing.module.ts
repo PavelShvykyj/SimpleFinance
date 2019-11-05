@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'main', component: MainComponent },
   { path: 'storege/:storegeID', component:  StoregeFormComponent, resolve : {storege : StoregeResolver}},
   { path: 'calendar/:storegeID/:storegeName', component:  CalendarComponent },
-  { path: 'action/:dateID/:storegeID' , component : ActionComponent },
+  { path: 'action/:dateID/:storegeID/:storegeName' , component : ActionComponent },
   { path: 'actionlist/:storegeID/:storegeName' , component : ActionListComponent },
   { path: '**', component:  HomeComponent }
 ];

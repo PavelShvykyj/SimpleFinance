@@ -87,7 +87,7 @@ async function OnActionUpdateHandler(changes : functions.Change<FirebaseFirestor
         if(BlockedCounterDateSnap.exists) {
             const BlockedCounterDateData = BlockedCounterDateSnap.data();
             if(BlockedCounterDateData) {
-                await transaction.update(CounterDateRef,{countervalue :  changedSumm});
+                await transaction.update(CounterDateRef,{countervalue : BlockedCounterDateData.countervalue + changedSumm});
             } 
         } else {
             await transaction.create(CounterDateRef,{countervalue : changedSumm});

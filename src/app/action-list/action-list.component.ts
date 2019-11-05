@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActionListDataSourse } from './action-list-datasourse';
 import { FbbaseService } from '../services/fb-base.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MatSnackBar, MatDatepickerInputEvent, MatDialog, MatDialogRef } from '@angular/material';
+import { MatSnackBar, MatDatepickerInputEvent, MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { IAction } from 'functions/src/models';
 import { UpdateActionDialogComponent } from '../update-action-dialog/update-action-dialog.component';
@@ -75,7 +75,14 @@ export class ActionListComponent implements OnInit {
   }
 
   EditAction(action : Partial<IAction>) {
-    let EditDialogRef : MatDialogRef<UpdateActionDialogComponent> =  this.dialog.open(UpdateActionDialogComponent,{data : action});
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.position = {'top' : '0'};
+    dialogConfig.autoFocus = true;
+    dialogConfig.closeOnNavigation = true;
+    dialogConfig.data = action;
+    let EditDialogRef : MatDialogRef<UpdateActionDialogComponent> =  this.dialog.open(UpdateActionDialogComponent,dialogConfig);
+    
+    
     EditDialogRef.afterClosed().subscribe(res =>{
       if(res.answer != 'save') {
         return;

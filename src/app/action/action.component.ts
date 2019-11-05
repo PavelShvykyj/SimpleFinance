@@ -33,6 +33,7 @@ export class ActionComponent implements OnInit {
   dateID : number;
   selectedDate : Date;
   storegeID: string;
+  storegeName: string;
 
   constructor(private _formBuilder: FormBuilder,
               private router : Router,
@@ -45,7 +46,8 @@ export class ActionComponent implements OnInit {
                 this.dateID =  1*(this.activatedrout.snapshot.params.dateID as number);
                 this.selectedDate = new Date(this.dateID*1);  
                 this.storegeID = this.activatedrout.snapshot.params.storegeID;  
-               }
+                this.storegeName = this.activatedrout.snapshot.params.storegeName;  
+              }
 
   ngOnInit() {
     
@@ -69,7 +71,7 @@ export class ActionComponent implements OnInit {
 
 
   Cancel() {
-    this.router.navigateByUrl('main')
+    this.router.navigateByUrl(`calendar/${this.storegeID}/${this.storegeName}`)
   }
 
   Save() {
@@ -86,7 +88,7 @@ export class ActionComponent implements OnInit {
     }
    
     this.db.CreateAction(this.activatedrout.snapshot.params.storegeID, action).subscribe(
-      res => {this.router.navigateByUrl('main')},
+      res => {this.router.navigateByUrl(`calendar/${this.storegeID}/${this.storegeName}`)},
       err => { this._snackBar.open('Ошибка при создании затраты...')}
 
     );

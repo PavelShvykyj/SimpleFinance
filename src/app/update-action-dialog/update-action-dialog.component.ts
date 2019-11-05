@@ -31,7 +31,7 @@ export class UpdateActionDialogComponent implements OnInit {
     
     this.form = new FormGroup({summ: new FormControl(this.data.summ,Validators.required),
                                description: new FormControl(this.data.desckription),
-                               category: new FormControl(actionCategory[this.data.сategory-1],Validators.required)
+                               category: new FormControl(actionCategory[this.data.category],Validators.required)
                               })  
   }
 
