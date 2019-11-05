@@ -1,0 +1,31 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /{restOfPath=**} {
+    	allow read , write;
+    }
+    
+    function isOwner(userid,financeID) {
+    	return  isAuthenticated() && userid in get(/databases/$(database)/documents/finances/$(financeID)).data.owners;
+    }
+    
+    function isAuthenticated() {
+    	return request.auth.uid != null;
+    }
+    
+    match /finances/{financeID} {
+    	allow read,write: if isOwner(request.auth.uid,financeID);
+    	
+      match /{restOfPath=**} {
+      	allow read,write: if isOwner(request.auth.uid,financeID);
+      }
+    
+    }
+    
+    match /finances/AppOptions {
+    	allow read;
+      allow write: if request.auth.uid == 'imKtRR2q3gSYpYIPtMRe5otpwE93';
+    }
+  }
+}
