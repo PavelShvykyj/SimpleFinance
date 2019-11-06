@@ -150,8 +150,8 @@ export class FbbaseService {
     if(!counterSnap.exists) {
       const emptyCounter = {countervalue : 0};
       await this.db.firestore.collection(`${this.RootPath}/storeges/${StoregeID}/counters`).doc(CounterID).set(emptyCounter);
-
     }
   }
 
+  
 }

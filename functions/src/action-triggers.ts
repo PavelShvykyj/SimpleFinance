@@ -3,17 +3,16 @@ import { IAction } from "./models";
 import { db } from "./init";
 
 
-
-export const OnActionCreated = functions.firestore.document('/finances/{finanseid}/storeges/{storegeid}/actions/{actionid}')
+export const OnActionCreated = functions.runWith({ memory: '512MB', timeoutSeconds: 120 }).firestore.document('/finances/{finanseid}/storeges/{storegeid}/actions/{actionid}')
     .onCreate((snap: FirebaseFirestore.DocumentSnapshot, context: functions.EventContext) =>
         OnActionCreateHandler(snap, context));
 
-export const OnActionUpdateded = functions.firestore.document('/finances/{finanseid}/storeges/{storegeid}/actions/{actionid}')
+export const OnActionUpdateded = functions.runWith({ memory: '512MB', timeoutSeconds: 120 }).firestore.document('/finances/{finanseid}/storeges/{storegeid}/actions/{actionid}')
     .onUpdate((snap : functions.Change<FirebaseFirestore.DocumentSnapshot> , context: functions.EventContext) =>
         OnActionUpdateHandler(snap , context));
 
 
-export const OnActionDeleted = functions.firestore.document('/finances/{finanseid}/storeges/{storegeid}/actions/{actionid}')
+export const OnActionDeleted = functions.runWith({ memory: '512MB', timeoutSeconds: 120 }).firestore.document('/finances/{finanseid}/storeges/{storegeid}/actions/{actionid}')
     .onDelete((snap: FirebaseFirestore.DocumentSnapshot, context: functions.EventContext)=>OnActionDeleteHandler(snap , context))
 
 
@@ -111,14 +110,14 @@ async function OnActionDeleteHandler(snap : FirebaseFirestore.DocumentSnapshot, 
         const CounterDatePath = `finances/${context.params.finanseid}/storeges/${context.params.storegeid}/counters/${actoinDateID}`;
         const CounterDateRef =  db.doc(CounterDatePath);
         const BlockedCounterDateSnap = await transaction.get(CounterDateRef); 
-        
+        const BlockedCounterDateData = BlockedCounterDateSnap.data();
         
         if(BlockedCounterData) {
             await transaction.update(CounterRef,{countervalue : (BlockedCounterData.countervalue as number) - changedSumm});
         } 
 
-        if(BlockedCounterDateSnap.exists) {
-            await transaction.delete(CounterDateRef);
+        if(BlockedCounterDateData) {
+            await transaction.update(CounterDateRef,{countervalue : (BlockedCounterDateData.countervalue as number) - changedSumm});
         } 
     })
 

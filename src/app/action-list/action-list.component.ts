@@ -19,6 +19,7 @@ import { UpdateActionDialogComponent } from '../update-action-dialog/update-acti
 export class ActionListComponent implements OnInit {
 
   displayedColumns : string[] = ['date','summ','category'];
+  
   dataSource : ActionListDataSourse;
   storegeID : string;
   storegeName : string;

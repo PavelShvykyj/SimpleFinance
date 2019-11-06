@@ -50,7 +50,10 @@ export class StoregeFormComponent implements OnInit {
     }
 
     this.db.UpdateStorege(this.storege.id, this.form.value).subscribe(
-      res=>{ this.router.navigateByUrl('main')},
+      kassRef=>{
+        console.log(kassRef);  
+        this.db.CreateDateCounter(kassRef.id,'storegecounter');
+        this.router.navigateByUrl('main')},
       err => {}
     ) 
 

@@ -41,7 +41,7 @@
             <ng-container matColumnDef="category">
               <mat-header-cell *matHeaderCellDef>Категория</mat-header-cell>
               <mat-cell *matCellDef="let action">{{GetCategory(action.category)  }}</mat-cell>
-              <mat-footer-cell *matFooterCellDef>  </mat-footer-cell>
+              <mat-footer-cell *matFooterCellDef> </mat-footer-cell>
             </ng-container>
           
             <ng-container matColumnDef="desckription">
@@ -51,7 +51,8 @@
             <ng-container matColumnDef="buttonsgroup">
               <mat-header-cell *matHeaderCellDef>Действия </mat-header-cell>
               <mat-cell *matCellDef="let action"><button mat-button (click)="DeleteAction(action.id)"><mat-icon>delete</mat-icon> </button> <button (click)="EditAction(action)" mat-button> <mat-icon>edit</mat-icon></button>  </mat-cell>
-              <mat-footer-cell *matFooterCellDef> buttonsgroup  </mat-footer-cell>
+              <mat-footer-cell *matFooterCellDef> 
+              </mat-footer-cell>
             </ng-container>
           
             <mat-header-row *matHeaderRowDef="displayedColumns ; sticky: true" ></mat-header-row>
@@ -59,7 +60,7 @@
             <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
             <mat-row *matRowDef="let descriptionrow; columns: ['desckription','buttonsgroup'] "></mat-row>
             
-            <mat-footer-row *matFooterRowDef="displayedColumns"></mat-footer-row>
+            <mat-footer-row *matFooterRowDef="displayedColumns ; sticky: true"></mat-footer-row>
             
           </mat-table>
     </mat-card-content>
