@@ -16,6 +16,7 @@ import { icalendar, CalendarElementStatus } from '../models/icalendar';
 export class CalendarComponent implements OnInit {
 
   counter : icounter = {};
+  total : number = 0;
   storege : IStorege;
   calendar : icalendar[];
   calendarElementStatus : typeof CalendarElementStatus  = CalendarElementStatus; 
@@ -44,8 +45,8 @@ export class CalendarComponent implements OnInit {
   ngOnInit() {
   }
 
-
   InjectCounterInCalendar() {
+    this.total = 0;
     this.calendar.forEach(calendarelement => {
       this.SetCountervalue(calendarelement)
     });
@@ -129,7 +130,6 @@ export class CalendarComponent implements OnInit {
 
   SetCountervalue(element : icalendar)  {
    
-
    if(element.date == undefined) {
     element.counter = "";
     return
@@ -141,12 +141,23 @@ export class CalendarComponent implements OnInit {
       element.counter = "";
     } else {
       element.counter = this.counter[id].toString();
+      this.total = this.total + this.counter[id];
     }
   }
 
   GoToAction(element : icalendar) {
     this.router.navigateByUrl(`action/${this.GetDateID(element.date)}/${this.storege.id}/${this.storege.name}`);
   }
+
+  GoToActionList() {
+    this.router.navigateByUrl(`actionlist/${this.storege.id}/${this.storege.name}`);
+  }
+
+  GoToStorege() {
+    this.router.navigateByUrl('main')
+  }
+  
+
 
   GetDateID(date : Date): number {
     return Date.UTC(date.getUTCFullYear(),date.getUTCMonth(), date.getUTCDate()+1,0,0,0,0);

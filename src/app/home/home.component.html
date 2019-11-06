@@ -7,23 +7,23 @@
     
     <mat-card-content >
 
-        <p class="content-paragraf"> Приложение Simple finance позволяет вести учет денежных средств в разрезе касс и статей затрат. </p>
+        <p class="content-paragraf"> Приложение Simple finance поможет понять на что тратятся деньги  (позволяет вести учет денежных средств в разрезе касс и статей затрат). </p>
 
         <mat-list>
 
-          <mat-list-item >
-              <h4 matLine>  Зарегитсрируйтесь или войдите</h4>
-              <p matLine>Для регитсрации  вам нужен только аккаунт Google </p>        
+          <mat-list-item *ngIf="isLogedout$ | async">
+              <h4 matLine class="content-paragraf">  Зарегитсрируйтесь или войдите</h4>
+              <p  class="content-paragraf" matLine>Для регитсрации  вам нужен только аккаунт Google </p>        
           </mat-list-item>
 
-          <mat-chip-list ><mat-chip class="divider" color="primary" selected="true" (click)="Login()">Логин</mat-chip></mat-chip-list>
+          <mat-chip-list *ngIf="isLogedout$ | async"><mat-chip class="divider" color="primary" selected="true" (click)="Login()">Логин</mat-chip></mat-chip-list>
 
-          <mat-list-item>
-              <h4 matLine>  Если Вы уже зашли нажмите </h4>
+          <mat-list-item *ngIf="isLogedin$ | async">
+              <h4 matLine class="content-paragraf">  Вы зашли как , {{userMail$ | async }} нажмите </h4>
           </mat-list-item>
 
           
-          <mat-chip-list ><mat-chip class="divider"  color="primary" selected="true" (click)="Storeges()">Начать работу </mat-chip></mat-chip-list>  
+          <mat-chip-list *ngIf="isLogedin$ | async"><mat-chip class="divider"  color="primary" selected="true" (click)="Storeges()">Начать работу </mat-chip></mat-chip-list>  
         </mat-list>
 
     </mat-card-content>

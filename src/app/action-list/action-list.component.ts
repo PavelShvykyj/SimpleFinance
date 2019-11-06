@@ -65,10 +65,14 @@ export class ActionListComponent implements OnInit {
     return this.form.get('startDate');
   }
 
-  Cancel() {
+  GoToStorege() {
     this.router.navigateByUrl('main')
   }
 
+  GoToCalendar() {
+    this.router.navigateByUrl(`calendar/${this.storegeID}/${this.storegeName}`);
+  }
+    
   OnStartDateInput(event : MatDatepickerInputEvent<Date>) {
     this.UpdatePeriod(event.value);
     this.dataSource.LoadActions(this.storegeID,this.startPeriod,this.endPeriod,0,100)

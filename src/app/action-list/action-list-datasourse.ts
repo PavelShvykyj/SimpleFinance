@@ -1,4 +1,4 @@
-import { iaction } from '../models/iaction';
+import { iaction } from './../models/iaction';
 import { CollectionViewer, DataSource } from "@angular/cdk/collections";
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { FbbaseService } from '../services/fb-base.service';
@@ -9,6 +9,8 @@ export class ActionListDataSourse implements DataSource<iaction> {
 
 
     private actionSubject = new BehaviorSubject<iaction[]>([]);
+    private totalSubject = new BehaviorSubject<number>(0);
+    public totalSubject$ : Observable<number> = this.totalSubject.asObservable();
     private loadingSubject = new BehaviorSubject<boolean>(false);
 
 
@@ -34,6 +36,18 @@ export class ActionListDataSourse implements DataSource<iaction> {
             catchError(() => of([])),
             finalize(() => this.loadingSubject.next(false))
         )
-        .subscribe(actions => {this.actionSubject.next(actions)} );
+        .subscribe(actions => {
+            this.totalSubject.next(this.GetTotals(actions))
+            this.actionSubject.next(actions)} );
     }
+
+    private GetTotals(actions : iaction[]) : number {
+        let total : number = 0;
+        actions.forEach(action => {
+            total = total + action.summ;
+            
+        });
+        
+        return total;
+    } 
 } 

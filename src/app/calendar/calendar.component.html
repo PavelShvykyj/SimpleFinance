@@ -2,7 +2,11 @@
   <mat-card-title>
       {{ storege.name}}
   </mat-card-title>
- 
+  
+  <mat-card-subtitle>
+      Итого : {{ total }}
+  </mat-card-subtitle>
+
   <mat-card-content>
       <mat-grid-list cols="7" rowHeight="40px">
           <mat-grid-tile *ngFor="let element of calendar">
@@ -18,4 +22,8 @@
       </mat-grid-list>
   </mat-card-content>  
 
+  <mat-card-actions>
+    <button mat-button color='primary' (click)="GoToStorege()">К списку касс</button> 
+    <button mat-button color='primary' (click)="GoToActionList()">К списку затрат</button>   
+</mat-card-actions> 
 </mat-card>

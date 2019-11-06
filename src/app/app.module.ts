@@ -48,6 +48,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { ActionComponent } from './action/action.component';
 import { ActionListComponent } from './action-list/action-list.component';
 import { UpdateActionDialogComponent } from './update-action-dialog/update-action-dialog.component';
+import { ReportsComponent } from './reports/reports.component';
 
 
 
@@ -63,7 +64,8 @@ import { UpdateActionDialogComponent } from './update-action-dialog/update-actio
     CalendarComponent,
     ActionComponent,
     ActionListComponent,
-    UpdateActionDialogComponent
+    UpdateActionDialogComponent,
+    ReportsComponent
   ],
   imports: [
     ReactiveFormsModule,

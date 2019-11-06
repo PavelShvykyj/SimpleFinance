@@ -10,22 +10,26 @@
     <mat-nav-list (click)="drawer.close()">
       <a  mat-list-item routerLink="home" >
           <mat-icon>help</mat-icon>
-          <span> About </span>  
+          <span> О программе </span>  
       </a>
 
       <a *ngIf="isLogedout$ | async" mat-list-item routerLink="login" >
           <mat-icon>account_circle</mat-icon>
-          <span> Login </span>  
+          <span> Войти </span>  
       </a>
       <a *ngIf="isLogedin$ | async" mat-list-item (click)="LogOut()" >
         <mat-icon>exit_to_app</mat-icon>
-        <span> Logout </span>
+        <span> Выйти </span>
       </a>
       <a *ngIf="isLogedin$ | async" mat-list-item routerLink="main" >
           <mat-icon>apps</mat-icon>
           <span> Кассы </span>  
       </a>
 
+      <a *ngIf="isLogedin$ | async" mat-list-item routerLink="reports" >
+        <mat-icon>trending_up</mat-icon>
+        <span> Отчеты </span>  
+    </a>
 
     </mat-nav-list>
   </mat-sidenav>
