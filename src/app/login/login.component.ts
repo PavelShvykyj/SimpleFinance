@@ -67,17 +67,27 @@ export class LoginComponent implements OnInit, OnDestroy {
         });
       }  
       else {
-          await this.db.DeterminRootPath(resoult.user.uid);
-          /// без ngZone ангулар не понимает что прошли изменения и не обновляет интерфейс
-          this.ngZone.run(() => this.router.navigateByUrl("main"));
+          this._snackBar.open("Готовим данные ...", "Ок",{duration: 2000});
+          console.log(resoult.user.uid);
+          this.db.RootPathExist(resoult.user.uid).subscribe(res => {
+            if (res) {
+              /// await this.db.DeterminRootPath(resoult.user.uid); вариант без ожидания
+              /// без ngZone ангулар не понимает что прошли изменения и не обновляет интерфейс
+              this.ngZone.run(() => this.router.navigateByUrl("main"));
+            } 
+          },
+          err => {
+            this.auth.LogOut();
+            this._snackBar.open("Извините что то пошло не так", "Try again",{duration: 2000});
+            this.ngZone.run(() => this.router.navigateByUrl("home"));    
+           })
       }
-    
-
   }
 
   OnLoginFail(error) {
     this.db.ClearRootPath();
-    console.log('OnLoginFail',error)
-
+    this.auth.LogOut();
+    this._snackBar.open("Извините что то пошло не так", "Try again",{duration: 2000});
+    this.ngZone.run(() => this.router.navigateByUrl("home"));    
   }
 }

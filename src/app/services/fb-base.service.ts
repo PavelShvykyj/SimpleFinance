@@ -29,6 +29,23 @@ export class FbbaseService {
     )
   }
 
+  RootPathExist(id : string ) : Observable<boolean> {
+    if(!id) {
+      return of(false);
+    } 
+
+    return this.db.collection('finances', ref => ref.where('owners','array-contains',id).limit(1))
+           .snapshotChanges()
+           .pipe(map(snap => {
+            this.rootPath = "";
+            if(snap.length != 0) {
+              this.rootPath =`finances/${snap[0].payload.doc.id}`
+            } 
+            return snap.length != 0;
+          }))
+
+  }
+
   ClearRootPath() { 
     this.rootPath = "";
   }
