@@ -1,21 +1,23 @@
 <mat-card >
-    <mat-card-header>
-        <mat-card-title> 
-          {{GetDate(startPeriod)  | date:'MMMM'}}
-        
-          <form  [formGroup]="form">
+    <mat-card-header class="row-container">
+        <mat-card-subtitle class="lesserBotomMargin"> 
+          <div>{{ storegeName }} : </div>
+          <div>{{GetDate(startPeriod)  | date:'MMMM'}} </div>  
+        </mat-card-subtitle>
+
+        <form  [formGroup]="form">
               <mat-form-field  color="primary">  
                     <input (dateInput)="OnStartDateInput($event)" disabled required [matDatepicker]="StartPeriodInput"  [formControl]="startDate"  matInput placeholder="дата периода"> 
                     <mat-datepicker-toggle  matSuffix [for]="StartPeriodInput"></mat-datepicker-toggle>
                     <mat-datepicker  touchUi disabled="false" startView="year" #StartPeriodInput></mat-datepicker>
-                    <mat-hint>Произвольная дата месяца </mat-hint> 
+                    <!-- <mat-hint>Произвольная дата месяца </mat-hint>  -->
                     <mat-error > Значение должно быть заполнено </mat-error>
               </mat-form-field>   
-          </form>
+        </form>
 
         
-        </mat-card-title>
-        <mat-card-subtitle> {{ storegeName }}  </mat-card-subtitle>
+        
+       
     </mat-card-header>
     
     <mat-card-content class="onscreen">

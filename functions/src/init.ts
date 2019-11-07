@@ -16,6 +16,6 @@ export async function UpdateUserDisable(id : string, isDisablwed : boolean) {
 
 export async function InitStartDatabase(userid : string, userEmail : string | undefined) {
     const financeRef = await db.collection('finances').add({name : userEmail, owners : [userid]});
-    const storegeRef = await db.doc(`finances/${financeRef.id}`).collection('storeges').add({name : "Касса по умолчнаию"});
+    const storegeRef = await db.doc(`finances/${financeRef.id}`).collection('storeges').add({name : "Касса 1"});
     await db.doc(`finances/${financeRef.id}/storeges/${storegeRef.id}`).collection('counters').doc('StoregeCounter').set({countervalue : 0 })
 }

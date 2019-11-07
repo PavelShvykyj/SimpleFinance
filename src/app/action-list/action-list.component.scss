@@ -1,8 +1,18 @@
 .onscreen {
-    max-height:65vh;
+    max-height:60vh;
     overflow: auto;
 }
 
 mat-footer-row {
     font-weight: bold;
+}
+
+.lesserBotomMargin {
+    margin-bottom: 4px !important;
+}
+
+.row-container {
+    display: flex;
+    align-items : center;
+    justify-content: start;
 }
