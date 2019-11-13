@@ -26,7 +26,7 @@
           <span> Кассы </span>  
       </a>
 
-      <a *ngIf="isLogedin$ | async" mat-list-item routerLink="reports" >
+      <a *ngIf="isLogedin$ | async" mat-list-item (click)="GoToReports()" >
         <mat-icon>trending_up</mat-icon>
         <span> Отчеты </span>  
     </a>

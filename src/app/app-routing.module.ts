@@ -11,6 +11,7 @@ import { StoregeResolver } from './storege-form/storege-form.resolver';
 import { ActionComponent } from './action/action.component';
 import { ActionListComponent } from './action-list/action-list.component';
 import { ReportsComponent } from './reports/reports.component';
+import { ReportResolver } from './reports/report-resolver';
 
 const routes: Routes = [
   
@@ -21,7 +22,7 @@ const routes: Routes = [
   { path: 'calendar/:storegeID/:storegeName', component:  CalendarComponent },
   { path: 'action/:dateID/:storegeID/:storegeName' , component : ActionComponent },
   { path: 'actionlist/:storegeID/:storegeName' , component : ActionListComponent },
-  { path: 'reports' , component : ReportsComponent },
+  { path: 'reports' , component : ReportsComponent, resolve : {StoregesData : ReportResolver} },
   
   { path: '**', component:  HomeComponent }
 ];

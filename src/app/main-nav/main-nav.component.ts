@@ -34,6 +34,11 @@ export class MainNavComponent implements OnDestroy {
 
   }
 
+  GoToReports() {
+    
+    this.router.navigateByUrl('reports');
+  }
+
   ngOnDestroy() {
     this.LogOut();
   }

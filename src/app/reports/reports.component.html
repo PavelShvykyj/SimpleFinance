@@ -1,3 +1,74 @@
-<p>
-  В разработке!!! 
-</p>
+<mat-card >
+  <mat-card-header >
+      <mat-card-title > 
+        <h5>Отчет по кассе за период </h5>
+      </mat-card-title>
+      
+      <mat-card-subtitle > 
+        <form  [formGroup]="form">
+            <mat-form-field  color="primary">  
+                  <input  disabled required [matDatepicker]="StartPeriodInput"  formControlName="startDate"  matInput placeholder="начало периода"> 
+                  <mat-datepicker-toggle  matSuffix [for]="StartPeriodInput"></mat-datepicker-toggle>
+                  <mat-datepicker  touchUi disabled="false" startView="year" #StartPeriodInput></mat-datepicker>
+                  <mat-error > Значение должно быть заполнено </mat-error>
+            </mat-form-field>   
+
+            <mat-form-field  color="primary">  
+              <input disabled required [matDatepicker]="EndPeriodInput"  formControlName="endDate"  matInput placeholder="конец периода"> 
+              <mat-datepicker-toggle  matSuffix [for]="EndPeriodInput"></mat-datepicker-toggle>
+              <mat-datepicker  touchUi disabled="false" startView="year" #EndPeriodInput></mat-datepicker>
+              <mat-error > Значение должно быть заполнено </mat-error>
+            </mat-form-field>   
+            <mat-form-field>
+              <mat-select formControlName="storege" required placeholder="Касса">
+                  <mat-option *ngFor="let StoregeName of Storeges.Names" [value]="StoregeName">
+                    {{StoregeName}}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
+        </form>
+      </mat-card-subtitle > 
+
+  </mat-card-header>
+  
+  <mat-card-content >
+      <mat-table [dataSource]="dataSource" >
+          <ng-container matColumnDef="Date" sticky>
+            <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+            <mat-cell *matCellDef="let report">{{report.date | date:'mediumDate'}}</mat-cell>
+            <mat-footer-cell *matFooterCellDef> Итого : </mat-footer-cell>
+          </ng-container>
+          
+          <ng-container matColumnDef="DateTotal" >
+            <mat-header-cell *matHeaderCellDef>Всего за дату</mat-header-cell>
+            <mat-cell *matCellDef="let report;">{{ report.datetotal }}</mat-cell>
+            <mat-footer-cell *matFooterCellDef> {{ dataSource.storegetotalSubject$ | async }}  </mat-footer-cell>
+          </ng-container>
+        
+          <ng-container *ngFor="let category of [0,1,2,3,4,5,6,7,8]" [matColumnDef]="categories[category]">
+            <mat-header-cell *matHeaderCellDef>{{ categories[category] }}</mat-header-cell>
+            <mat-cell *matCellDef="let report">{{report[category]}}</mat-cell>
+            <mat-footer-cell *matFooterCellDef> {{ (dataSource.categorytotalSubject$ | async)[category]}}  </mat-footer-cell>
+          </ng-container>
+        
+        
+        
+          <mat-header-row *matHeaderRowDef="displayedColumns ; sticky: true" ></mat-header-row>
+        
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+          
+          <mat-footer-row *matFooterRowDef="displayedColumns ; sticky: true"></mat-footer-row>
+          
+        </mat-table>
+  </mat-card-content>
+
+  <mat-card-actions>
+      <button mat-button color='primary' (click)="UpdateReportData()">Обновить</button> 
+    <button mat-button color='primary' (click)="GoToStorege()">К списку касс</button> 
+
+  </mat-card-actions>
+</mat-card>    
+
+
+

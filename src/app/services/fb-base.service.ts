@@ -143,6 +143,10 @@ export class FbbaseService {
     return Date.UTC(date.getUTCFullYear(),date.getUTCMonth(), date.getUTCDate()+1,0,0,0,0);
   }
 
+  GetDateByID(ID : number) : Date {
+    return new Date(ID);
+  } 
+
   GetStoregeDateCounters(StoregeID : string) : Observable<icounter> {
 
     if(!this.rootPath) {
@@ -156,7 +160,7 @@ export class FbbaseService {
           snapCounters.forEach(element => {
             counter[element.payload.doc.id] = (element.payload.doc.data() as icounterelement).countervalue;
           });
-
+          console.log('service', counter);
           return counter;
            } )
       ) 

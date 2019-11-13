@@ -49,6 +49,7 @@ import { ActionComponent } from './action/action.component';
 import { ActionListComponent } from './action-list/action-list.component';
 import { UpdateActionDialogComponent } from './update-action-dialog/update-action-dialog.component';
 import { ReportsComponent } from './reports/reports.component';
+import { ReportResolver } from './reports/report-resolver';
 
 
 
@@ -104,6 +105,7 @@ import { ReportsComponent } from './reports/reports.component';
     UpdateActionDialogComponent
   ],
   providers: [StoregeResolver,
+              ReportResolver,
               FbAuthService, 
               FbbaseService],
   bootstrap: [AppComponent]
