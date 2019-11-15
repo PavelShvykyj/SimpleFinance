@@ -16,15 +16,15 @@ export class ActionComponent implements OnInit {
   summFormGroup: FormGroup;
   descriptionFormGroup: FormGroup;
   categories : string[] = [
-    actionCategory[actionCategory.sport],
-    actionCategory[actionCategory.eat],
-    actionCategory[actionCategory.necessary],
-    actionCategory[actionCategory.unnecessary],
-    actionCategory[actionCategory.pocket],
-    actionCategory[actionCategory.chemistry],
-    actionCategory[actionCategory.cat],
-    actionCategory[actionCategory.clothes],
-    actionCategory[actionCategory.education]
+    actionCategory[0],
+    actionCategory[1],
+    actionCategory[2],
+    actionCategory[3],
+    actionCategory[4],
+    actionCategory[5],
+    actionCategory[6],
+    actionCategory[7],
+    actionCategory[8]
   ]
 
  

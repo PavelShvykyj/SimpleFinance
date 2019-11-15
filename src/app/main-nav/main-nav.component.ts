@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { Component, OnDestroy } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { FbAuthService } from '../services/fb-auth.service';
 
 @Component({
@@ -23,8 +23,10 @@ export class MainNavComponent implements OnDestroy {
 
 
   constructor(private breakpointObserver: BreakpointObserver, private Auth : FbAuthService, private router : Router) {
+    
     this.isLogedin$ =  this.Auth.isLogedin;
     this.isLogedout$ = this.isLogedin$.pipe(map(resoult => !resoult));
+    
     this.pictureUrl$ = this.Auth.user.pipe(map(user => user ? user.photoURL : null ))
   }
 

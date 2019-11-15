@@ -8,6 +8,7 @@
     <mat-toolbar >Menu</mat-toolbar>
     
     <mat-nav-list (click)="drawer.close()">
+      
       <a  mat-list-item routerLink="home" >
           <mat-icon>help</mat-icon>
           <span> О программе </span>  
@@ -29,7 +30,7 @@
       <a *ngIf="isLogedin$ | async" mat-list-item (click)="GoToReports()" >
         <mat-icon>trending_up</mat-icon>
         <span> Отчеты </span>  
-    </a>
+      </a>
 
     </mat-nav-list>
   </mat-sidenav>

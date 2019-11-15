@@ -1,7 +1,7 @@
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap, share  } from 'rxjs/operators';
 import { FbbaseService } from './fb-base.service';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class FbAuthService {
   private authState$ : Observable<firebase.User>  
   
   constructor(private afAuth : AngularFireAuth, private db : FbbaseService) { 
-    this.authState$ = this.afAuth.authState;
+    this.authState$ = this.afAuth.authState.pipe(share());
 
   }
 
