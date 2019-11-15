@@ -1,5 +1,5 @@
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { IAction, actionCategory } from './../../../functions/src/models';
+import { actionCategory } from '../models/iaction';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
@@ -13,15 +13,15 @@ export class UpdateActionDialogComponent implements OnInit {
   form : FormGroup;
 
   categories : string[] = [
-    actionCategory[actionCategory.sport],
-    actionCategory[actionCategory.eat],
-    actionCategory[actionCategory.necessary],
-    actionCategory[actionCategory.unnecessary],
-    actionCategory[actionCategory.pocket],
-    actionCategory[actionCategory.chemistry],
-    actionCategory[actionCategory.cat],
-    actionCategory[actionCategory.clothes],
-    actionCategory[actionCategory.education]
+    actionCategory[0],
+    actionCategory[1],
+    actionCategory[2],
+    actionCategory[3],
+    actionCategory[4],
+    actionCategory[5],
+    actionCategory[6],
+    actionCategory[7],
+    actionCategory[8]
   ]
 
   constructor(

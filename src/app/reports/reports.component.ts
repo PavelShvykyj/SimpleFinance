@@ -6,8 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FbbaseService } from '../services/fb-base.service';
 import { MatSnackBar } from '@angular/material';
 import { IStoreges } from '../models/istoreges';
-import { actionCategory } from 'functions/src/models';
-
+import {  actionCategory } from './../models/iaction';
 
 
 @Component({

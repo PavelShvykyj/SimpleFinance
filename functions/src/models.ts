@@ -1,13 +1,13 @@
 export enum actionCategory {
-    sport,
-    eat,
-    necessary,
-    unnecessary,
-    pocket,
-    chemistry,
-    cat,
-    clothes,
-    education
+    Спорт,
+    Еда,
+    Необходимо,
+    Развлечения,
+    Накарманные,
+    Бытовая,
+    Питомец,
+    Одежда,
+    Образование
 }
 
 export interface IAppOptions {

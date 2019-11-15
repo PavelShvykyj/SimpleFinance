@@ -5,7 +5,7 @@ import { FbbaseService } from '../services/fb-base.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar, MatDatepickerInputEvent, MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { IAction } from 'functions/src/models';
+
 import { UpdateActionDialogComponent } from '../update-action-dialog/update-action-dialog.component';
 
 
@@ -79,7 +79,7 @@ export class ActionListComponent implements OnInit {
     this.dataSource.LoadActions(this.storegeID,this.startPeriod,this.endPeriod,0,100)
   }
 
-  EditAction(action : Partial<IAction>) {
+  EditAction(action : Partial<iaction>) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.position = {'top' : '0'};
     dialogConfig.autoFocus = true;
