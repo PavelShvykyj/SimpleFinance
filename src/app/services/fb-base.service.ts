@@ -112,6 +112,7 @@ export class FbbaseService {
   } 
 
   UpdateStorege(id : string, value : Partial<IStorege>) : Observable<any> {
+    
     if(!id) {
       return from( this.db.collection(`${this.RootPath}/storeges`).add(value));
     }
